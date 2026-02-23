@@ -1,0 +1,43 @@
+{
+  "users": [
+    {
+      "id": "USR-1771857137842-3BA89D",
+      "username": "officialmfondavid@gmail.com",
+      "fullName": "Gift david",
+      "phone": "+2349027037972",
+      "salt": "a1cb765d06f2b47428bcd344ee16ef6d",
+      "password": "adceebef19cc23ee71a92e5c66229fb2708e08c76a95ae49f262218c0ec6d891",
+      "createdAt": "2026-02-23T14:32:17.859Z"
+    }
+  ],
+  "sessions": {
+    "a5fa429fc3dfa9ce3c4ea878f2176d7ee77363c55fd2c2ab81819ecb3b06dd79": {
+      "userId": "USR-1771857137842-3BA89D",
+      "createdAt": 1771857137860
+    },
+    "561035981855bb76d35a69e21520b669c4738fbeb4d8bf2600fca363805b40fe": {
+      "userId": "USR-1771857137842-3BA89D",
+      "createdAt": 1771861409464
+    },
+    "2f40709231eefe736d9dd96f7fafa222e12671b35a3a53d84ac1a75080f66215": {
+      "userId": "USR-1771857137842-3BA89D",
+      "createdAt": 1771867080466
+    }
+  },
+  "reports": [
+    {
+      "reportId": "RPT-1771857295413-9E428A",
+      "submittedBy": "officialmfondavid@gmail.com",
+      "location": "Ajah",
+      "agent": "Ragnarok Property Dvelopment Limited",
+      "reporterName": "Mfon Dige David",
+      "reporterEmail": "officialmfondavid@gmail.com",
+      "phone": "09027037972",
+      "issue": "Landlord and agent are causing too many issues on house poor man can not rent a house again in Lagos Island",
+      "evidenceFile": "evidence-1771857295398-cc978e3d.pdf",
+      "status": "Pending Review",
+      "submittedAt": "2026-02-23T14:34:55.413Z"
+    }
+  ],
+  "consultations": []
+}

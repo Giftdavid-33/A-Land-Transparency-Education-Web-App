@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LandGuard NG — Buy Land Safely in Nigeria</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0a1f14;--forest:#0d3322;--emerald:#145c38;--jade:#1a7a4a;--mint:#22c55e;--gold:#c9a84c;--gold-lt:#f0d98a;--cream:#fafaf5;--parchment:#f3efe0;--white:#fff;--muted:#6b7280;--border:rgba(255,255,255,.1);--shadow:0 20px 60px rgba(10,31,20,.18);--r:10px;--fh:'Playfair Display',Georgia,serif;--fb:'DM Sans',system-ui,sans-serif}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--fb);font-size:16px;line-height:1.7;overflow-x:hidden}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--cream)}::-webkit-scrollbar-thumb{background:var(--jade);border-radius:99px}
+
+/* Header */
+header{position:sticky;top:0;z-index:900;background:rgba(10,31,20,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 6%;display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-icon{width:38px;height:38px;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--jade));display:flex;align-items:center;justify-content:center;font-size:18px}
+.logo-text{font-family:var(--fh);font-size:19px;font-weight:700;color:var(--white);letter-spacing:.3px}
+.logo-text span{color:var(--gold)}
+nav{display:flex;align-items:center;gap:4px}
+nav a{color:rgba(255,255,255,.75);padding:8px 14px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:500;transition:all .2s}
+nav a:hover{color:var(--white);background:rgba(255,255,255,.1)}
+.nav-cta{background:linear-gradient(135deg,var(--gold),#a8803a)!important;color:var(--ink)!important;font-weight:600!important;padding:8px 18px!important}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(201,168,76,.4)}
+.user-pill{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:99px;padding:6px 16px 6px 8px}
+.user-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--emerald));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--ink)}
+.user-name{font-size:13px;font-weight:600;color:var(--white)}
+.logout-btn{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.5);font-size:13px;padding:4px 8px;border-radius:6px;transition:all .2s;font-family:var(--fb);font-weight:500}
+.logout-btn:hover{color:#ef4444;background:rgba(239,68,68,.1)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:22px;height:2px;background:var(--white);border-radius:99px;transition:.3s}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;background:var(--forest);padding:110px 6% 100px;min-height:92vh;display:flex;align-items:center}
+.hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 70% 50%,rgba(26,122,74,.25) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 15% 80%,rgba(201,168,76,.12) 0%,transparent 50%),linear-gradient(160deg,var(--forest) 0%,var(--ink) 100%)}
+.hero-grid{position:absolute;inset:0;pointer-events:none;opacity:.06;background-image:linear-gradient(rgba(255,255,255,.4) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.4) 1px,transparent 1px);background-size:60px 60px}
+.hero-content{position:relative;max-width:700px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);color:var(--gold-lt);padding:6px 16px;border-radius:99px;font-size:13px;font-weight:500;margin-bottom:30px;animation:fadeUp .6s ease both}
+.hero h1{font-family:var(--fh);font-size:clamp(38px,6vw,68px);line-height:1.1;color:var(--white);margin-bottom:24px;animation:fadeUp .6s .1s ease both}
+.hero h1 em{color:var(--gold);font-style:italic}
+.hero p{font-size:clamp(16px,2vw,18px);color:rgba(255,255,255,.72);max-width:560px;margin-bottom:44px;font-weight:300;animation:fadeUp .6s .2s ease both}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .6s .3s ease both}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:8px;font-family:var(--fb);font-size:15px;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all .22s}
+.btn-gold{background:linear-gradient(135deg,var(--gold) 0%,#a8803a 100%);color:var(--ink);box-shadow:0 4px 20px rgba(201,168,76,.35)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,168,76,.45)}
+.btn-outline{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.35)}
+.btn-outline:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.6)}
+.hero-stats{position:absolute;bottom:48px;right:6%;display:flex;gap:40px;animation:fadeUp .6s .4s ease both}
+.stat{text-align:center}
+.stat-num{font-family:var(--fh);font-size:32px;font-weight:700;color:var(--gold);line-height:1}
+.stat-label{font-size:12px;color:rgba(255,255,255,.55);margin-top:4px;font-weight:500;letter-spacing:.8px;text-transform:uppercase}
+
+/* Sections */
+.section{padding:90px 6%}
+.section-alt{background:var(--parchment)}
+.section-label{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--jade);margin-bottom:12px}
+.section-title{font-family:var(--fh);font-size:clamp(28px,4vw,42px);color:var(--ink);line-height:1.15;margin-bottom:16px}
+.section-sub{font-size:17px;color:var(--muted);max-width:560px;font-weight:300}
+.section-header{margin-bottom:56px}
+
+/* Checklist */
+.checklist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.check-card{background:var(--white);border:1px solid #e5e7eb;border-radius:var(--r);padding:28px;display:flex;gap:16px;align-items:flex-start;box-shadow:0 2px 8px rgba(0,0,0,.04);transition:all .25s;opacity:0;transform:translateY(20px)}
+.check-card.visible{opacity:1;transform:none}
+.check-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.08);border-color:var(--mint)}
+.check-icon{width:40px;height:40px;flex-shrink:0;background:linear-gradient(135deg,var(--emerald),var(--jade));border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--white);font-size:18px}
+.check-body{flex:1}
+.check-step{font-size:11px;font-weight:600;color:var(--jade);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.check-title{font-weight:600;color:var(--ink);margin-bottom:4px}
+.check-desc{font-size:14px;color:var(--muted);line-height:1.5}
+
+/* Docs */
+.docs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px}
+.doc-card{background:var(--forest);border-radius:var(--r);padding:32px;border:1px solid rgba(255,255,255,.08);transition:all .25s;opacity:0;transform:translateY(20px)}
+.doc-card.visible{opacity:1;transform:none}
+.doc-card:hover{transform:translateY(-3px);border-color:rgba(201,168,76,.4)}
+.doc-tag{display:inline-block;background:rgba(201,168,76,.2);color:var(--gold-lt);font-size:11px;font-weight:600;padding:4px 10px;border-radius:4px;margin-bottom:16px;letter-spacing:.8px;text-transform:uppercase}
+.doc-card h4{font-family:var(--fh);font-size:20px;color:var(--white);margin-bottom:12px}
+.doc-card p{font-size:14px;color:rgba(255,255,255,.65);line-height:1.6}
+
+/* Forms */
+.form-wrapper{max-width:680px;margin:0 auto;background:var(--white);border-radius:16px;border:1px solid #e5e7eb;padding:48px;box-shadow:var(--shadow)}
+.form-wrapper h3{font-family:var(--fh);font-size:28px;color:var(--ink);margin-bottom:8px}
+.form-wrapper .sub{color:var(--muted);font-size:15px;margin-bottom:36px;font-weight:300}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.form-row{grid-template-columns:1fr}}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:7px}
+.field input,.field textarea,.field select{width:100%;padding:13px 16px;background:var(--cream);border:1.5px solid #e5e7eb;border-radius:8px;font-family:var(--fb);font-size:15px;color:var(--ink);transition:border-color .2s;outline:none}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--jade);background:var(--white);box-shadow:0 0 0 3px rgba(26,122,74,.1)}
+.field textarea{resize:vertical;min-height:120px}
+.submit-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--emerald),var(--jade));color:var(--white);border:none;border-radius:8px;font-family:var(--fb);font-size:16px;font-weight:600;cursor:pointer;transition:all .22s;display:flex;align-items:center;justify-content:center;gap:8px}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(20,92,56,.35)}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+/* Upload box */
+.upload-box{border:2px dashed #d1d5db;border-radius:8px;padding:28px;text-align:center;cursor:pointer;transition:all .2s;background:var(--cream)}
+.upload-box:hover{border-color:var(--jade);background:rgba(26,122,74,.04)}
+.upload-box.has-file{border-color:var(--mint);border-style:solid;background:rgba(34,197,94,.05)}
+.upload-icon{font-size:28px;margin-bottom:8px}
+.upload-text{font-size:14px;font-weight:600;color:var(--ink)}
+.upload-hint{font-size:12px;color:var(--muted);margin-top:4px}
+.file-preview{display:none;margin-top:10px;padding:12px 16px;background:var(--cream);border-radius:8px;border:1px solid #e5e7eb;align-items:center;gap:10px}
+.file-preview.show{display:flex}
+
+/* LGA Directory */
+.lga-bar{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px}
+.lga-select{flex:1;min-width:200px;padding:13px 16px;background:var(--white);border:1.5px solid #e5e7eb;border-radius:8px;font-family:var(--fb);font-size:15px;color:var(--ink);outline:none;transition:border-color .2s;cursor:pointer}
+.lga-select:focus{border-color:var(--jade);box-shadow:0 0 0 3px rgba(26,122,74,.1)}
+.lga-result{background:var(--white);border:1px solid #e5e7eb;border-radius:12px;padding:32px;box-shadow:0 4px 16px rgba(0,0,0,.06);display:none}
+.lga-result.show{display:block}
+.lga-result h3{font-family:var(--fh);font-size:22px;color:var(--ink);margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--parchment)}
+.lga-contacts{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.contact-card{background:var(--parchment);border-radius:8px;padding:18px;border-left:3px solid var(--jade)}
+.contact-type{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--jade);margin-bottom:6px}
+.contact-name{font-weight:600;color:var(--ink);margin-bottom:4px}
+.contact-detail{font-size:13px;color:var(--muted);line-height:1.6}
+.contact-detail a{color:var(--jade);text-decoration:none;font-weight:500}
+.contact-detail a:hover{text-decoration:underline}
+.lga-placeholder{text-align:center;padding:48px 20px;color:var(--muted)}
+.lga-placeholder .ph-icon{font-size:48px;margin-bottom:12px}
+.lga-placeholder p{font-size:15px;font-weight:300}
+
+/* Toast */
+#toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--forest);color:var(--white);padding:14px 24px;border-radius:10px;font-size:15px;font-weight:500;box-shadow:0 8px 30px rgba(0,0,0,.25);transition:transform .4s cubic-bezier(.34,1.56,.64,1);z-index:9999;white-space:nowrap;border-left:4px solid var(--mint)}
+#toast.success{border-color:var(--mint)}
+#toast.error{border-color:#ef4444}
+#toast.show{transform:translateX(-50%) translateY(0)}
+
+/* CTA strip */
+.cta-strip{background:linear-gradient(135deg,var(--ink) 0%,var(--forest) 60%,var(--emerald) 100%);padding:80px 6%;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.cta-strip h2{font-family:var(--fh);font-size:clamp(24px,3.5vw,38px);color:var(--white)}
+.cta-strip p{color:rgba(255,255,255,.7);margin-top:8px;font-weight:300}
+.consult-form-wrap{max-width:720px;margin:0 auto;background:var(--white);border-radius:16px;padding:48px;border:1px solid #e5e7eb;box-shadow:var(--shadow)}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr}}
+.about-visual{background:linear-gradient(135deg,var(--forest),var(--emerald));border-radius:16px;padding:48px;aspect-ratio:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:1px solid rgba(255,255,255,.1)}
+.about-visual .big-num{font-family:var(--fh);font-size:72px;line-height:1;background:linear-gradient(135deg,var(--gold),var(--gold-lt));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.about-visual p{color:rgba(255,255,255,.7);margin-top:12px;font-size:16px}
+.about-text p{color:var(--muted);margin-bottom:20px;font-weight:300;font-size:16px}
+.pillars{display:flex;flex-direction:column;gap:14px;margin-top:32px}
+.pillar{display:flex;gap:14px;align-items:flex-start}
+.pillar-dot{width:32px;height:32px;flex-shrink:0;border-radius:50%;background:rgba(26,122,74,.1);border:2px solid var(--jade);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--jade);font-weight:700}
+.pillar-body{font-size:15px}
+.pillar-body strong{color:var(--ink);display:block}
+.pillar-body span{color:var(--muted);font-size:13px}
+
+/* Footer */
+footer{background:var(--ink);padding:60px 6% 30px;color:rgba(255,255,255,.6)}
+.footer-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:30px}
+.footer-brand .logo-text{color:var(--white)}
+.footer-brand p{font-size:14px;margin-top:10px;max-width:260px;font-weight:300}
+.footer-links h5{font-size:13px;font-weight:600;color:var(--white);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+.footer-links a{display:block;color:rgba(255,255,255,.55);text-decoration:none;font-size:14px;margin-bottom:8px;transition:color .2s}
+.footer-links a:hover{color:var(--gold)}
+.footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px}
+.footer-bottom strong{color:var(--gold)}
+
+/* Auth gate */
+#auth-gate{position:fixed;inset:0;z-index:9998;background:var(--ink);display:flex;align-items:center;justify-content:center}
+#auth-gate .spinner{width:40px;height:40px;border:3px solid rgba(201,168,76,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.tc{transition:opacity .5s ease,transform .5s ease}
+
+@media(max-width:768px){
+  nav{display:none}
+  nav.open{display:flex;flex-direction:column;position:fixed;top:70px;left:0;right:0;background:var(--ink);padding:16px;border-bottom:1px solid var(--border);z-index:800}
+  .hamburger{display:flex}
+  .hero-stats{position:static;margin-top:48px;justify-content:flex-start}
+  .hero{padding-bottom:60px}
+  .form-wrapper,.consult-form-wrap{padding:28px}
+}
+@media(max-width:480px){
+  header{padding:0 4%}
+  .section{padding:60px 4%}
+  .hero{padding:80px 4% 60px}
+  .hero-stats{flex-wrap:wrap;gap:24px}
+}
+</style>
+</head>
+<body>
+
+<div id="auth-gate"><div class="spinner"></div></div>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo">
+    <div class="logo-icon">🛡</div>
+    <span class="logo-text">Land<span>Guard</span> NG</span>
+  </a>
+  <nav id="main-nav">
+    <a href="#checklist">Checklist</a>
+    <a href="#verify">Verify Docs</a>
+    <a href="#lga">Find Registry</a>
+    <a href="#report">Report</a>
+    <a href="#consult">Consult</a>
+    <a href="#about">About</a>
+    <div class="user-pill" id="user-pill" style="display:none">
+      <div class="user-avatar" id="user-avatar">?</div>
+      <span class="user-name" id="user-name">User</span>
+      <button class="logout-btn" onclick="logout()">Sign Out</button>
+    </div>
+  </nav>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🇳🇬 &nbsp;Nigeria's Land Protection Platform</div>
+    <h1>Buy Land in Nigeria<br><em>Without the Fear</em></h1>
+    <p>Avoid fraud, verify titles, and protect your investment with expert guidance tailored for Nigerian property transactions.</p>
+    <div class="hero-actions">
+      <button class="btn btn-gold" onclick="scrollTo('checklist')">Start Verification →</button>
+      <button class="btn btn-outline" onclick="scrollTo('report')">Report Suspicious Land</button>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num" id="stat-reports">0</div><div class="stat-label">Reports Filed</div></div>
+    <div class="stat"><div class="stat-num">12</div><div class="stat-label">States Covered</div></div>
+    <div class="stat"><div class="stat-num">24h</div><div class="stat-label">Response Time</div></div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section class="section" id="checklist">
+  <div class="section-header">
+    <div class="section-label">Before You Pay</div>
+    <h2 class="section-title">Land Buying Checklist</h2>
+    <p class="section-sub">Complete every step before handing over any money. No exceptions.</p>
+  </div>
+  <div class="checklist-grid">
+    <div class="check-card tc"><div class="check-icon">📜</div><div class="check-body"><div class="check-step">Step 01</div><div class="check-title">Confirm the Land Title</div><div class="check-desc">Verify the document type — C of O, Gazette, or Excision — and confirm it is valid and government-issued.</div></div></div>
+    <div class="check-card tc"><div class="check-icon">🏛</div><div class="check-body"><div class="check-step">Step 02</div><div class="check-title">Search the Land Registry</div><div class="check-desc">Visit the State Land Registry to confirm there are no encumbrances, disputes, or government acquisitions on the land.</div></div></div>
+    <div class="check-card tc"><div class="check-icon">🗺</div><div class="check-body"><div class="check-step">Step 03</div><div class="check-title">Verify the Survey Plan</div><div class="check-desc">Cross-check the survey plan coordinates with SURCON (Surveyors Council of Nigeria) to confirm the plan is legitimate.</div></div></div>
+    <div class="check-card tc"><div class="check-icon">👤</div><div class="check-body"><div class="check-step">Step 04</div><div class="check-title">Confirm Rightful Ownership</div><div class="check-desc">Request valid ID from the seller. Cross-reference with title documents. Be wary of multiple sellers for a single plot.</div></div></div>
+    <div class="check-card tc"><div class="check-icon">🔎</div><div class="check-body"><div class="check-step">Step 05</div><div class="check-title">Physical Inspection</div><div class="check-desc">Visit the land in person. Confirm boundaries match the survey plan. Talk to neighbours about any disputes.</div></div></div>
+    <div class="check-card tc"><div class="check-icon">⚖️</div><div class="check-body"><div class="check-step">Step 06</div><div class="check-title">Engage a Lawyer</div><div class="check-desc">All transactions should be concluded by a registered legal practitioner. Never sign without legal review.</div></div></div>
+  </div>
+</section>
+
+<!-- VERIFY DOCS -->
+<section class="section" id="verify" style="background:var(--forest)">
+  <div class="section-header">
+    <div class="section-label" style="color:var(--gold)">Know Your Documents</div>
+    <h2 class="section-title" style="color:var(--white)">Document Verification Guide</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,.6)">Understanding these documents can save you from losing millions of naira to fraudsters.</p>
+  </div>
+  <div class="docs-grid">
+    <div class="doc-card tc"><div class="doc-tag">Ownership Proof</div><h4>Certificate of Occupancy (C of O)</h4><p>The gold standard of Nigerian land documents. Issued by the State Governor under the Land Use Act, it confirms the holder's legal right to occupy the land for 99 years.</p></div>
+    <div class="doc-card tc"><div class="doc-tag">Government Record</div><h4>Gazette</h4><p>An official government publication recording excised land. It confirms the land has been officially recognised and released by the government. Always verify the date and volume number.</p></div>
+    <div class="doc-card tc"><div class="doc-tag">Release Approval</div><h4>Excision</h4><p>A government-approved release of land from government acquisition, typically for community or family land. Excised land is removed from the gazette and returned to original owners.</p></div>
+    <div class="doc-card tc"><div class="doc-tag">Technical Drawing</div><h4>Survey Plan</h4><p>A technical document prepared by a licensed surveyor showing exact land coordinates, dimensions, and boundaries. Must be stamped and signed by a registered surveyor. Verify with SURCON.</p></div>
+    <div class="doc-card tc"><div class="doc-tag">Family Land</div><h4>Deed of Assignment</h4><p>A legal document transferring ownership from one party to another. It must be executed by a lawyer, stamped by the Land Registry, and registered. Beware of unregistered deeds.</p></div>
+    <div class="doc-card tc"><div class="doc-tag">⚠️ Caution</div><h4>Red Flag Documents</h4><p>Be wary of photocopies without originals, documents with altered dates, informal receipts as primary proof, and any seller refusing a Land Registry search. Serious warning signs.</p></div>
+  </div>
+</section>
+
+<!-- LGA DIRECTORY -->
+<section class="section" id="lga">
+  <div class="section-header">
+    <div class="section-label">Find Your Registry</div>
+    <h2 class="section-title">LGA Contact Directory</h2>
+    <p class="section-sub">Select your state and LGA to find the exact Land Registry, SURCON office, and key contacts for where you want to buy.</p>
+  </div>
+  <div class="lga-bar">
+    <select class="lga-select" id="state-sel" onchange="onState()">
+      <option value="">— Select a State —</option>
+      <option value="lagos">Lagos State</option>
+      <option value="abuja">FCT — Abuja</option>
+      <option value="rivers">Rivers State</option>
+      <option value="ogun">Ogun State</option>
+      <option value="oyo">Oyo State</option>
+      <option value="kano">Kano State</option>
+      <option value="delta">Delta State</option>
+      <option value="anambra">Anambra State</option>
+      <option value="enugu">Enugu State</option>
+      <option value="edo">Edo State</option>
+      <option value="imo">Imo State</option>
+      <option value="cross_river">Cross River State</option>
+    </select>
+    <select class="lga-select" id="lga-sel" onchange="onLga()" disabled>
+      <option value="">— Select an LGA —</option>
+    </select>
+  </div>
+  <div class="lga-placeholder" id="lga-ph"><div class="ph-icon">🗺</div><p>Select your state and LGA above to see<br>the right contacts for your land purchase.</p></div>
+  <div class="lga-result" id="lga-res"><h3 id="lga-title"></h3><div class="lga-contacts" id="lga-contacts"></div></div>
+</section>
+
+<!-- REPORT FORM -->
+<section class="section section-alt" id="report">
+  <div class="form-wrapper">
+    <div class="section-label">Community Protection</div>
+    <h3>Report Suspicious Property</h3>
+    <p class="sub">Help protect others. Your report is kept confidential and reviewed by our team.</p>
+    <form id="report-form">
+      <div class="form-row">
+        <div class="field"><label>Property Location *</label><input type="text" name="location" placeholder="e.g. Ibeju Lekki, Lagos" required></div>
+        <div class="field"><label>Agent or Company Name</label><input type="text" name="agent" placeholder="Optional"></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Your Name</label><input type="text" name="reporterName" id="rpt-name" placeholder="Auto-filled from account"></div>
+        <div class="field"><label>Your Phone</label><input type="tel" name="phone" id="rpt-phone" placeholder="Auto-filled from account"></div>
+      </div>
+      <div class="field"><label>Your Email (for updates)</label><input type="email" name="reporterEmail" placeholder="Optional"></div>
+      <div class="field"><label>Describe the Issue *</label><textarea name="issue" placeholder="Describe the suspicious activity in detail — documents shown, what was said, how you found out..." required></textarea></div>
+      <div class="field">
+        <label>Upload Evidence <span style="font-weight:400;color:var(--muted)">(photo or document — max 2MB)</span></label>
+        <div class="upload-box" id="upload-box" onclick="document.getElementById('ev-input').click()">
+          <div class="upload-icon">📎</div>
+          <div class="upload-text">Click to attach a photo or document</div>
+          <div class="upload-hint">JPG, PNG, PDF up to 2MB</div>
+        </div>
+        <input type="file" id="ev-input" accept=".jpg,.jpeg,.png,.gif,.webp,.pdf" style="display:none" onchange="onFileSelect(this)">
+        <div class="file-preview" id="file-preview">
+          <span id="file-icon" style="font-size:22px">📄</span>
+          <div style="flex:1"><div id="file-name" style="font-size:13px;font-weight:600;color:var(--ink)"></div><div id="file-size" style="font-size:12px;color:var(--muted)"></div></div>
+          <button type="button" onclick="removeFile()" style="background:none;border:none;cursor:pointer;color:#ef4444;font-size:18px;padding:4px">✕</button>
+        </div>
+      </div>
+      <button type="submit" class="submit-btn" id="report-btn"><span>Submit Report</span><span>🔒</span></button>
+    </form>
+    <p style="font-size:13px;color:var(--muted);margin-top:16px;text-align:center">All reports are reviewed within 48 hours and treated confidentially.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <div><h2>Need Expert Guidance?</h2><p>Book a free consultation with our property verification specialists.</p></div>
+  <button class="btn btn-gold" onclick="scrollTo('consult')">Book Free Consultation →</button>
+</div>
+
+<!-- CONSULTATION -->
+<section class="section" id="consult">
+  <div class="consult-form-wrap">
+    <div class="section-label">Expert Advice</div>
+    <h3 style="font-family:var(--fh);font-size:28px;color:var(--ink);margin-bottom:8px">Book a Consultation</h3>
+    <p style="color:var(--muted);margin-bottom:36px;font-size:15px;font-weight:300">Fill in your details and we'll reach out within 24 hours.</p>
+    <form id="consult-form">
+      <div class="form-row">
+        <div class="field"><label>Full Name *</label><input type="text" name="name" placeholder="Your full name" required></div>
+        <div class="field"><label>Email Address *</label><input type="email" name="email" placeholder="your@email.com" required></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Phone Number</label><input type="tel" name="phone" placeholder="+234 000 000 0000"></div>
+        <div class="field"><label>Service Needed</label>
+          <select name="service">
+            <option>Document Verification</option>
+            <option>Land Registry Search</option>
+            <option>Survey Plan Check</option>
+            <option>Legal Referral</option>
+            <option>General Inquiry</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label>Additional Information</label><textarea name="message" placeholder="Tell us more about your situation..." rows="4"></textarea></div>
+      <button type="submit" class="submit-btn" id="consult-btn"><span>Request Consultation</span><span>📅</span></button>
+    </form>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section section-alt" id="about">
+  <div class="about-grid">
+    <div class="about-visual">
+      <div class="big-num">36+</div>
+      <p>States covered across Nigeria's land registry network</p>
+      <div style="margin-top:28px;display:flex;gap:24px">
+        <div style="text-align:center"><div style="font-family:var(--fh);font-size:28px;color:var(--gold)">98%</div><div style="font-size:12px;color:rgba(255,255,255,.5);margin-top:4px">Fraud Prevented</div></div>
+        <div style="text-align:center"><div style="font-family:var(--fh);font-size:28px;color:var(--gold)">₦∞</div><div style="font-size:12px;color:rgba(255,255,255,.5);margin-top:4px">Losses Avoided</div></div>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="section-label">Our Mission</div>
+      <h2 class="section-title">Protecting Property Buyers Across Nigeria</h2>
+      <p>LandGuard NG was created in response to Nigeria's rising land fraud epidemic. We equip buyers with the knowledge, tools, and connections to make safe, informed property decisions.</p>
+      <p>Whether you're buying family land in Ogun State, commercial plots in Lagos, or residential land in Abuja — we provide the framework to protect your investment.</p>
+      <div class="pillars">
+        <div class="pillar"><div class="pillar-dot">1</div><div class="pillar-body"><strong>Education First</strong><span>We teach buyers exactly what to look for and what to avoid in every transaction.</span></div></div>
+        <div class="pillar"><div class="pillar-dot">2</div><div class="pillar-body"><strong>Community Reporting</strong><span>Our report system flags known fraudsters and suspicious properties to protect the community.</span></div></div>
+        <div class="pillar"><div class="pillar-dot">3</div><div class="pillar-body"><strong>Expert Network</strong><span>We connect buyers with trusted surveyors, lawyers, and registry officials.</span></div></div>
+      </div>
+      <p style="margin-top:28px;font-size:14px;color:var(--muted)">Powered by <strong style="color:var(--ink)">DavidskilTech</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo"><div class="logo-icon">🛡</div><span class="logo-text">Land<span>Guard</span> NG</span></div>
+      <p>Nigeria's trusted land transaction safety platform.</p>
+    </div>
+    <div class="footer-links"><h5>Platform</h5><a href="#checklist">Buying Checklist</a><a href="#verify">Document Guide</a><a href="#lga">Find Registry</a><a href="#report">Report Fraud</a><a href="#consult">Consultation</a></div>
+    <div class="footer-links"><h5>Resources</h5><a href="#about">About LandGuard</a><a href="#verify">C of O Explained</a><a href="#verify">Survey Plan Guide</a><a href="#report">Contact Us</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 LandGuard NG — Protecting Property Buyers Across Nigeria</span>
+    <span>Powered by <strong>DavidskilTech</strong></span>
+  </div>
+</footer>
+<div id="toast"></div>
+
+<script>
+// ── LGA DATA ──────────────────────────────────────────────────
+const LGA={
+  lagos:{name:'Lagos State',registry:{name:'Lagos State Land Registry (HQ)',address:'The Secretariat, Alausa, Ikeja, Lagos',phone:'01-740-7000',email:'info@lagoslands.gov.ng',hours:'Mon–Fri, 8am–4pm'},surcon:{name:'SURCON Lagos Regional Office',address:'Ikoyi, Lagos Island',phone:'01-269-5671'},caution:'Confirm land is not in a government acquisition zone — especially in Lekki, Ibeju-Lekki, and Epe corridors.',lgas:{'Alimosho':{zone:'Alimosho Land Registry Sub-Office, Akowonjo',phone:'01-774-0000',note:'Fastest growing LGA. High fraud risk — always demand original C of O.'},'Epe':{zone:'Epe Land Registry, Epe Town Centre',phone:'01-980-7500',note:'Booming corridor — many forest reserves and acquired lands. Verify excision carefully.'},'Eti-Osa':{zone:'Lekki Land Registry, Lekki Phase 1',phone:'01-271-0000',note:'Lekki Phase 1 & 2 — beware reclaimed land without C of O. Oceanfront land frequently disputed.'},'Ibeju-Lekki':{zone:'Ibeju-Lekki Land Registry, Epe Expressway',phone:'01-980-8000',note:'⚠️ HIGHEST FRAUD RISK in Lagos. Most land has no C of O. Demand excision and verify at Alausa HQ.'},'Ikeja':{zone:'Ikeja Land Registry, Oba Akinjobi Road GRA',phone:'01-496-8000',note:'GRA Ikeja properties require LEDB clearance.'},'Ikorodu':{zone:'Ikorodu Land Registry, Ikorodu Town Hall',phone:'01-689-5000',note:'Industrial expansion zone. Many recent excisions — verify dates carefully.'},'Lagos Island':{zone:'Lagos Island Land Registry, Tinubu Square',phone:'01-263-5000',note:'Historic Crown Land — consult a lawyer experienced in Lagos Island tenure.'},'Mushin':{zone:'Mushin Land Office, Mushin Road',phone:'01-452-6000',note:'Dense urban area — boundary disputes common. Commission an independent survey.'},'Surulere':{zone:'Surulere Land Registry, Adeniran Ogunsanya St',phone:'01-774-8800',note:'Relatively well-documented. Verify for any LSDPC encumbrances.'},'Badagry':{zone:'Badagry Land Registry, Badagry Expressway',phone:'01-773-4000',note:'Border town — verify nationality status of land and seller ID carefully.'},'Agege':{zone:'Agege Land Registry Sub-Office, Agege Town Hall',phone:'01-496-1000',note:'Many family lands — ensure excision is complete before purchase.'},'Apapa':{zone:'Apapa Land Registry, Apapa Wharf Road',phone:'01-545-0700',note:'Port industrial zone. Most land held under Federal Government titles.'}}},
+  abuja:{name:'FCT — Abuja',registry:{name:'Abuja Geographic Information Systems (AGIS)',address:'Plot 508 Zone AO, Central Business District, Abuja',phone:'09-461-3360',email:'info@agis.gov.ng',hours:'Mon–Fri, 8am–4pm'},surcon:{name:'SURCON FCT Office',address:'Garki Area 1, Abuja',phone:'09-234-5678'},caution:'All land in Abuja belongs to the Federal Government. You can only acquire a Right of Occupancy (R of O). Beware of anyone selling "family land" in the FCT — it does not legally exist.',lgas:{'Abuja Municipal (AMAC)':{zone:'AGIS Main Office, Central Business District',phone:'09-461-3360',note:'Core Abuja. All transactions must go through AGIS.'},'Bwari':{zone:'Bwari Area Council Registry, Bwari Township',phone:'09-461-3200',note:'Rapid development area. Verify FCDA layout approval.'},'Gwagwalada':{zone:'Gwagwalada Area Council Land Office',phone:'09-461-3400',note:'University town — lots of fraudulent allocations near UniAbuja.'},'Kuje':{zone:'Kuje Area Council Land Registry',phone:'09-461-3500',note:'Agricultural/peri-urban zone. Verify Federal Government acquisition status.'},'Abaji':{zone:'Abaji Area Council Land Registry',phone:'09-461-3000',note:'Peri-urban area — ensure plot falls within approved layout.'}}},
+  rivers:{name:'Rivers State',registry:{name:'Rivers State Ministry of Lands',address:'State Secretariat Complex, Moscow Road, Port Harcourt',phone:'084-239-000',email:'lands@rivers.gov.ng',hours:'Mon–Fri, 8am–4pm'},surcon:{name:'SURCON South-South Regional Office',address:'Trans-Amadi Industrial Layout, Port Harcourt',phone:'084-236-000'},caution:'Oil company pipeline corridors and community land disputes are common. Always verify community consent and check for oil company right-of-way encumbrances.',lgas:{'Port Harcourt':{zone:'Port Harcourt Land Registry, Moscow Road',phone:'084-230-000',note:'Capital city — best documentation. GRA PH requires PHDCL clearance.'},'Obio-Akpor':{zone:'Rumuola Land Office, Obio-Akpor',phone:'084-231-500',note:'Fastest growing area. High fraud risk around Rumuola and Rumuigbo corridors.'},'Eleme':{zone:'Eleme Land Registry, Eleme Junction',phone:'084-412-000',note:'Heavy oil industry — verify no NLNG or SPDC pipeline crossings.'},'Ikwerre':{zone:'Isiokpo Land Office, Ikwerre LGA',phone:'084-320-000',note:'Family land dominates — community consent letters from village heads are essential.'}}},
+  ogun:{name:'Ogun State',registry:{name:'Ogun State Land Registry (OLAS)',address:'Oke-Mosan Secretariat, Abeokuta',phone:'039-241-000',email:'info@ogunlands.gov.ng',hours:'Mon–Fri, 8am–4pm'},surcon:{name:'SURCON South-West Regional Office',address:'Ibadan Road, Abeokuta',phone:'039-240-500'},caution:'Ogun is the biggest source of Lagos overspill land purchases. The Sagamu-Ore and Lagos-Abeokuta corridors have very high rates of multiple-selling fraud. Always verify at OLAS.',lgas:{'Sagamu':{zone:'Sagamu Land Registry, Lagos Road, Sagamu',phone:'037-640-000',note:'⚠️ HIGH FRAUD RISK. Proximity to Lagos drives intense land speculation. Demand original C of O.'},'Ifo':{zone:'Ifo Land Office, Lagos-Abeokuta Expressway',phone:'039-271-000',note:'Sango-Ota corridor — many informal layouts. Verify with OLAS.'},'Abeokuta South':{zone:'Abeokuta Land Registry, Oke-Mosan',phone:'039-241-100',note:'State capital. Well-documented. Check development restrictions around Olumo Rock.'},'Ijebu Ode':{zone:'Ijebu Ode Land Registry, Folagbade Street',phone:'037-432-000',note:'Strong land documentation culture. Ijebu family land sales without consent are common.'}}},
+  oyo:{name:'Oyo State',registry:{name:'Oyo State Land Registry',address:'State Secretariat, Agodi, Ibadan',phone:'02-241-6000',email:'lands@oyostate.gov.ng',hours:'Mon–Fri, 8am–4pm'},surcon:{name:'SURCON South-West Regional Office',address:'Iyaganku GRA, Ibadan',phone:'02-241-0500'},caution:'Ibadan has a complex mix of Crown Land, government layouts, and family land (Ibile). Multiple sales of the same plot by different family factions are common. Legal advice is essential.',lgas:{'Ibadan North':{zone:'Sasa Land Registry, Ring Road, Ibadan',phone:'02-241-7000',note:'University of Ibadan proximity — UI land acquisition buffer must be checked.'},'Ibadan South-West':{zone:'Bodija Land Office, Bodija, Ibadan',phone:'02-241-8000',note:'Bodija Estate — BDPA allocation required. Check for pending BDPA charges.'},'Oluyole':{zone:'New Bodija Land Office, Oluyole Estate',phone:'02-290-5000',note:'Active development zone with strong documentation.'},'Ogbomoso North':{zone:'Ogbomoso Land Registry, Ogbomoso Town Centre',phone:'038-720-000',note:'Secondary city. Check Lautech institution acquisitions.'}}},
+  kano:{name:'Kano State',registry:{name:'Kano State Ministry of Lands & Physical Planning',address:'Bompai Road, Kano Municipal',phone:'064-646-000',email:'lands@kanostate.gov.ng',hours:'Mon–Fri, 8am–4pm'},surcon:{name:'SURCON North Regional Office',address:'Nassarawa GRA, Kano',phone:'064-630-000'},caution:'Kano operates under dual land tenure — statutory (government title) and customary (emirate/community). Ensure any purchase has a formal statutory title, not just customary rights.',lgas:{'Kano Municipal':{zone:'Kano Municipal Land Registry, Bompai Road',phone:'064-646-100',note:'State capital. Best documentation. Verify heritage zone restrictions near the Old City.'},'Nassarawa':{zone:'Nassarawa GRA Land Office, Kano',phone:'064-646-300',note:'GRA area — well-documented. Still verify for dual allocations.'},'Gwale':{zone:'Gwale Land Registry, Gwale',phone:'064-646-500',note:'Traditional core area — customary rights dominant. Expert legal advice essential.'}}},
+  delta:{name:'Delta State',registry:{name:'Delta State Ministry of Lands, Survey & Urban Planning',address:'Government House Road, Asaba',phone:'046-282-000',email:'lands@deltastate.gov.ng',hours:'Mon–Fri, 8am–4pm'},surcon:{name:'SURCON South-South Regional Office',address:'Effurun, Warri',phone:'053-250-000'},caution:'Oil community land in Delta is highly contentious. Verify the community has legal authority to sell and that no pending oil spillage compensation claims exist.',lgas:{'Warri South':{zone:'Warri Land Registry, Effurun Road, Warri',phone:'053-253-000',note:'Oil city — high land values and fraud risk. Verify with Ministry HQ in Asaba.'},'Oshimili South':{zone:'Asaba Land Registry, Nnebisi Road, Asaba',phone:'046-283-000',note:'Capital city area. Best documentation in the state.'},'Sapele':{zone:'Sapele Land Registry, Sapele Town',phone:'054-430-000',note:'Timber and rubber belt — check agricultural/forest reserve acquisition zones.'}}},
+  anambra:{name:'Anambra State',registry:{name:'Anambra State Ministry of Lands',address:'Udoka Housing Estate, Awka',phone:'048-550-000',email:'lands@anambra.gov.ng',hours:'Mon–Fri, 8am–4pm'},surcon:{name:'SURCON South-East Regional Office',address:'Onitsha Road, Awka',phone:'048-551-000'},caution:'Family land (Ala Ulo) sales without full family consent are the most common fraud vector in Anambra. Always demand a family resolution letter signed by all principal members.',lgas:{'Onitsha North':{zone:'Onitsha Land Registry, New Market Road',phone:'046-212-000',note:'Commercial hub — highest land demand. Multiple-selling is rampant. Lawyer is mandatory.'},'Awka South':{zone:'Awka Land Registry, Udoka Avenue, Awka',phone:'048-552-000',note:'State capital. Government layouts well-documented. Still verify family land sales.'},'Nnewi North':{zone:'Nnewi Land Registry, Nnewi Town Centre',phone:'046-460-000',note:'Industrial/auto parts city. Verify Nnewi customary land boundaries carefully.'}}},
+  enugu:{name:'Enugu State',registry:{name:'Enugu State Ministry of Lands, Survey & Urban Dev.',address:'Independence Layout, Enugu',phone:'042-455-000',email:'lands@enugu.gov.ng',hours:'Mon–Fri, 8am–4pm'},surcon:{name:'SURCON South-East Regional Office',address:'GRA Enugu',phone:'042-456-000'},caution:'Coal mining legacy means parts of Enugu have underground mine workings. Do NOT buy land near old Enugu Coal mines without geological clearance from NIOMCO.',lgas:{'Enugu North':{zone:'Enugu North Land Registry, Independence Layout',phone:'042-455-100',note:'GRA and Independence Layout — best documented. Verify for coal mine buffer zones.'},'Enugu South':{zone:'Enugu South Land Office, Uwani',phone:'042-455-200',note:'Uwani residential area — active market. Standard due diligence applies.'},'Udi':{zone:'Udi Land Registry, Udi Town',phone:'042-810-000',note:'Coal belt — geological clearance essential before any purchase.'}}},
+  edo:{name:'Edo State',registry:{name:'Edo State Ministry of Lands & Survey',address:'Government House Road, Benin City',phone:'052-256-000',email:'lands@edostate.gov.ng',hours:'Mon–Fri, 8am–4pm'},surcon:{name:'SURCON South-South Regional Office',address:'GRA Benin City',phone:'052-258-000'},caution:"Benin City plots in the Oba of Benin's original jurisdiction require traditional consent (Oba's approval) IN ADDITION to government documentation. Do not skip this step.",lgas:{'Oredo':{zone:'Oredo Land Registry, Ring Road, Benin City',phone:'052-257-000',note:"Benin City core — both government C of O AND Oba's consent may be required."},'Egor':{zone:'Egor Land Office, Ugbowo, Benin City',phone:'052-259-000',note:'UNIBEN proximity — university acquisition buffer zone check required.'},'Ovia North-East':{zone:'Ovia Land Registry, Ore Road, Ovia',phone:'052-270-000',note:'Rubber plantation belt — verify no forestry/agriculture reserve encumbrances.'}}},
+  imo:{name:'Imo State',registry:{name:'Imo State Ministry of Lands, Survey & Urban Planning',address:'Douglas Road, Owerri',phone:'083-231-000',email:'lands@imostate.gov.ng',hours:'Mon–Fri, 8am–4pm'},surcon:{name:'SURCON South-East Regional Office',address:'New Owerri',phone:'083-232-000'},caution:"Family land (Obi) sales without all sons' consent is the leading cause of fraud in Imo. Always demand a family meeting resolution letter. Owerri North/Municipal boundary disputes are common.",lgas:{'Owerri Municipal':{zone:'Owerri Municipal Land Registry, Douglas Road',phone:'083-231-100',note:'State capital area. Best documentation. Verify boundary with Owerri North.'},'Owerri North':{zone:'Owerri North Land Office, Irete',phone:'083-231-200',note:'Peri-urban expansion zone. High fraud activity — verify at HQ.'},'Orlu':{zone:'Orlu Land Registry, Orlu Town Centre',phone:'083-440-000',note:'Orlu zone — family land dominant. Consent from Umunna (extended family) required.'}}},
+  cross_river:{name:'Cross River State',registry:{name:'Cross River State Ministry of Lands & Housing',address:'Mary Slessor Avenue, Calabar',phone:'087-232-000',email:'lands@crossriverstate.gov.ng',hours:'Mon–Fri, 8am–4pm'},surcon:{name:'SURCON South-South Regional Office',address:'Calabar Road, Calabar',phone:'087-233-000'},caution:'Some areas around Creek Town and the colonial waterfront are UNESCO heritage zones with development restrictions. Verify with the Cross River State Tourism Commission.',lgas:{'Calabar Municipal':{zone:'Calabar Municipal Land Registry, MCC Road',phone:'087-234-000',note:'Capital city. Heritage zone maps available at the Ministry. Consular areas need special clearances.'},'Calabar South':{zone:'Calabar South Land Office, Marian Road',phone:'087-235-000',note:'Port area — waterfront land requires Cross River Basin Development Authority clearance.'},'Odukpani':{zone:'Odukpani Land Office, Odukpani',phone:'087-236-000',note:'Rubber and palm plantation belt. Verify no CRSFDA agricultural reserve encumbrances.'}}}
+};
+
+function onState(){
+  const sk=document.getElementById('state-sel').value, ls=document.getElementById('lga-sel');
+  ls.innerHTML='<option value="">— Select an LGA —</option>'; ls.disabled=true;
+  document.getElementById('lga-res').classList.remove('show');
+  document.getElementById('lga-ph').style.display='block';
+  if(!sk||!LGA[sk])return;
+  Object.keys(LGA[sk].lgas).sort().forEach(n=>{const o=document.createElement('option');o.value=n;o.textContent=n;ls.appendChild(o);});
+  ls.disabled=false;
+}
+function onLga(){
+  const sk=document.getElementById('state-sel').value, lk=document.getElementById('lga-sel').value;
+  if(!sk||!lk)return;
+  const st=LGA[sk], lg=st.lgas[lk]; if(!lg)return;
+  document.getElementById('lga-ph').style.display='none';
+  document.getElementById('lga-title').textContent=lk+' — '+st.name;
+  document.getElementById('lga-contacts').innerHTML=[
+    {type:'🏛 Land Registry HQ',name:st.registry.name,detail:`<b>Address:</b> ${st.registry.address}<br><b>Phone:</b> <a href="tel:${st.registry.phone}">${st.registry.phone}</a><br><b>Hours:</b> ${st.registry.hours}${st.registry.email?`<br><b>Email:</b> <a href="mailto:${st.registry.email}">${st.registry.email}</a>`:''}`},
+    {type:'📍 Local Zone Office',name:lg.zone,detail:`<b>Phone:</b> <a href="tel:${lg.phone}">${lg.phone}</a>`},
+    {type:'📐 SURCON Regional Office',name:st.surcon.name,detail:`<b>Address:</b> ${st.surcon.address}<br><b>Phone:</b> <a href="tel:${st.surcon.phone}">${st.surcon.phone}</a>`},
+    {type:'⚠️ Key Note for this LGA',name:'',detail:lg.note},
+    {type:'🚨 State-Wide Caution',name:'',detail:st.caution}
+  ].map(c=>`<div class="contact-card"><div class="contact-type">${c.type}</div>${c.name?`<div class="contact-name">${c.name}</div>`:''}<div class="contact-detail">${c.detail}</div></div>`).join('');
+  document.getElementById('lga-res').classList.add('show');
+  document.getElementById('lga-res').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+// ── File Upload ───────────────────────────────────────────────
+let evData=null, evName=null;
+function onFileSelect(inp){
+  const f=inp.files[0]; if(!f)return;
+  if(f.size>2*1024*1024){showToast('⚠️ File too large. Max 2MB.','error');inp.value='';return;}
+  const r=new FileReader();
+  r.onload=e=>{
+    evData=e.target.result; evName=f.name;
+    document.getElementById('file-icon').textContent=f.type.startsWith('image/')?'🖼':'📄';
+    document.getElementById('file-name').textContent=f.name;
+    document.getElementById('file-size').textContent=(f.size/1024).toFixed(1)+' KB';
+    document.getElementById('file-preview').classList.add('show');
+    document.getElementById('upload-box').classList.add('has-file');
+    document.querySelector('.upload-text').textContent='✅ File attached';
+  };
+  r.readAsDataURL(f);
+}
+function removeFile(){
+  evData=null;evName=null;
+  document.getElementById('ev-input').value='';
+  document.getElementById('file-preview').classList.remove('show');
+  document.getElementById('upload-box').classList.remove('has-file');
+  document.querySelector('.upload-text').textContent='Click to attach a photo or document';
+}
+
+// ── Auth & Init ───────────────────────────────────────────────
+const token=localStorage.getItem('lg_token');
+(async()=>{
+  if(!token){window.location.href='/login';return;}
+  try{
+    const r=await fetch('/api/auth/me',{headers:{'Authorization':'Bearer '+token}});
+    if(!r.ok){localStorage.clear();window.location.href='/login';return;}
+    const u=await r.json();
+    document.getElementById('auth-gate').style.display='none';
+    const init=(u.fullName||u.username).split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    document.getElementById('user-avatar').textContent=init;
+    document.getElementById('user-name').textContent=u.fullName||u.username;
+    document.getElementById('user-pill').style.display='flex';
+    const rn=document.getElementById('rpt-name'); if(rn)rn.value=u.fullName||u.username;
+    const rp=document.getElementById('rpt-phone'); if(rp&&u.phone)rp.value=u.phone;
+    loadStats();
+  }catch{window.location.href='/login';}
+})();
+
+async function logout(){
+  try{await fetch('/api/auth/logout',{method:'POST',headers:{'Authorization':'Bearer '+token}});}catch{}
+  localStorage.clear(); window.location.href='/login';
+}
+function scrollTo(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'});}
+function toggleMenu(){document.getElementById('main-nav').classList.toggle('open');}
+function showToast(msg,type='success'){const t=document.getElementById('toast');t.textContent=msg;t.className=type+' show';setTimeout(()=>t.className=type,3500);}
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:.12});
+document.querySelectorAll('.tc').forEach(c=>io.observe(c));
+async function loadStats(){
+  try{const r=await fetch('/api/stats',{headers:{'Authorization':'Bearer '+token}});if(!r.ok)return;const d=await r.json();animNum('stat-reports',d.totalReports);}catch{}
+}
+function animNum(id,target){
+  const el=document.getElementById(id);if(!el||!target)return;
+  let c=0;const s=Math.max(1,Math.floor(target/40));
+  const t=setInterval(()=>{c=Math.min(c+s,target);el.textContent=c;if(c>=target)clearInterval(t);},30);
+}
+
+document.getElementById('report-form').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const btn=document.getElementById('report-btn');btn.disabled=true;btn.innerHTML='<span>Submitting...</span>';
+  const data=Object.fromEntries(new FormData(e.target).entries());
+  if(evData){data.evidenceBase64=evData;data.evidenceName=evName;}
+  try{
+    const r=await fetch('/api/report',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify(data)});
+    const j=await r.json();
+    if(r.ok){showToast('✅ Report submitted! ID: '+j.reportId);e.target.reset();removeFile();}
+    else showToast('⚠️ '+(j.error||'Submission failed'),'error');
+  }catch{showToast('⚠️ Network error — please try again','error');}
+  finally{btn.disabled=false;btn.innerHTML='<span>Submit Report</span><span>🔒</span>';}
+});
+
+document.getElementById('consult-form').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const btn=document.getElementById('consult-btn');btn.disabled=true;btn.innerHTML='<span>Sending...</span>';
+  const data=Object.fromEntries(new FormData(e.target).entries());
+  try{
+    const r=await fetch('/api/consult',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify(data)});
+    const j=await r.json();
+    if(r.ok){showToast('🎉 '+j.message);e.target.reset();}
+    else showToast('⚠️ '+(j.error||'Submission failed'),'error');
+  }catch{showToast('⚠️ Network error — please try again','error');}
+  finally{btn.disabled=false;btn.innerHTML='<span>Request Consultation</span><span>📅</span>';}
+});
+</script>
+</body>
+</html>
